@@ -14,7 +14,7 @@ public class Main {
         System.out.println("4. Показати ріелторів");
         System.out.println("5. Показати адрес продажу");
         System.out.println("6. Показати клієнтів");
-        System.out.println("7. Показати площу найбільшого попиту");
+        System.out.println("7. Показати нерухомість з найбільшою площею");
         System.out.println("8. Показати нерухомість з найбільшою кількістю кімнат");
         System.out.println("9. Показати середню вартість нерухомості");
         System.out.println("10. Видалити ріелтора");
@@ -64,7 +64,10 @@ public class Main {
                         System.out.println("Немає нерухомості.");
                     } else {
                         Estate largest = estateCollection.findLargestEstate();
-                        System.out.println("Найбільша площа: " + largest.getArea() + ", ID нерухомості: " + largest.getId());
+                        System.out.println("Найбільша площа: " + largest.getArea());
+                        System.out.println("ID нерухомості: " + largest.getId());
+                        System.out.println("Адреса: " + largest.getAddress().getCountry() + ", " + largest.getAddress().getCity() + ", " + largest.getAddress().getStreet() + ", " + largest.getAddress().getHouseNumber() + ", " + largest.getAddress().getApartmentNumber());
+                        System.out.println("Вартість: " + largest.getPrice());
                     }
                     break;
                 case 8:
@@ -74,6 +77,8 @@ public class Main {
                         Estate mostRooms = estateCollection.findEstateWithMostRooms();
                         System.out.println("Найбільша кількість кімнат: " + mostRooms.getNumberOfRooms());
                         System.out.println("ID нерухомості: " + mostRooms.getId());
+                        System.out.println("Адреса: " + mostRooms.getAddress().getCountry() + ", " + mostRooms.getAddress().getCity() + ", " + mostRooms.getAddress().getStreet() + ", " + mostRooms.getAddress().getHouseNumber() + ", " + mostRooms.getAddress().getApartmentNumber());
+                        System.out.println("Вартість: " + mostRooms.getPrice());
                     }
                     break;
                 case 9:
