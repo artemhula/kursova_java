@@ -1,8 +1,5 @@
+// models/Realtor.java
 package models;
-
-import java.util.Scanner;
-
-import static models.Address.createAdress;
 
 public class Realtor extends Person {
     private long id;
@@ -22,20 +19,4 @@ public class Realtor extends Person {
     public Address getCompanyAddress() {
         return companyAddress;
     }
-
-    public static Realtor createRealtor(Scanner scanner) {
-        System.out.print("Введіть прізвище ріелтора: ");
-        String name = scanner.next();
-        System.out.print("Введіть ім'я ріелтора: ");
-        name += " " + scanner.next();
-        System.out.print("Введіть по-батькові ріелтора: ");
-        name += " " + scanner.next();
-        System.out.print("Введіть номер телефону: ");
-        long phone = scanner.nextLong();
-        System.out.print("Введіть назву компанії: ");
-        String companyName = scanner.next();
-        Address companyAdress = createAdress(scanner);
-        return new Realtor(name, phone, companyName, companyAdress);
-    }
-
 }

@@ -1,6 +1,5 @@
+// models/Address.java
 package models;
-
-import java.util.Scanner;
 
 public class Address {
     private String country;
@@ -35,29 +34,5 @@ public class Address {
 
     public int getApartmentNumber() {
         return apartmentNumber;
-    }
-
-    public static Address createAdress(Scanner scanner) {
-        System.out.print("Введіть країну: ");
-        String country = scanner.next();
-        System.out.print("Введіть місто: ");
-        String city = scanner.next();
-        System.out.print("Введіть вулицю: ");
-        String street = scanner.next();
-        System.out.print("Введіть номер будинку: ");
-        int houseNumber = scanner.nextInt();
-        while (houseNumber <= 0) {
-            System.out.println("Номер будинку повинен бути більше 0.");
-            System.out.print("Введіть номер будинку: ");
-            houseNumber = scanner.nextInt();
-        }
-        System.out.print("Введіть номер квартири: ");
-        int apartmentNumber = scanner.nextInt();
-        while (apartmentNumber < 0) {
-            System.out.println("Номер квартири не може бути від'ємним.");
-            System.out.print("Введіть номер квартири: ");
-            apartmentNumber = scanner.nextInt();
-        }
-        return new Address(country, city, street, houseNumber, apartmentNumber);
     }
 }

@@ -1,8 +1,9 @@
+// collections/EstateCollection.java
+
 package collections;
 import models.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class EstateCollection {
     private ArrayList<Estate> estates;
@@ -46,87 +47,56 @@ public class EstateCollection {
         }
     }
 
-    public void addEstate(Estate estate) {
-        estates.add(estate);
-    }
+    public void addEstate(Estate estate) {estates.add(estate);}
 
-    public ArrayList<Estate> getEstates() {
-        return estates;
-    }
+    public ArrayList<Estate> getEstates() {return estates;}
 
-    public void showEstates() {
-        if (estates.isEmpty()) {
-            System.out.println("Немає нерухомості.");
-            return;
-        }
-        for (Estate estate : estates) {
-            System.out.println("---------");
-            Address address = estate.getAddress();
-            System.out.println("ID: " + estate.getId());
-            System.out.println("Адреса: " + address.getCountry() + ", " + address.getCity() + ", " + address.getStreet() + ", " + address.getHouseNumber() + ", " + address.getApartmentNumber());
-            System.out.println("Площа: " + estate.getArea());
-            System.out.println("Поверх: " + estate.getLevel());
-            System.out.println("Рік побудови: " + estate.getYear());
-            System.out.println("Кількість кімнат: " + estate.getNumberOfRooms());
-            System.out.println("Вартість: " + estate.getPrice());
-            System.out.println("ID клієнта: " + estate.getClientId());
-            System.out.println();
-        }
-    }
-
-
-    public Estate findLargestEstate() {
-        Estate largest = estates.get(0);
-        for (Estate current : estates) {
-            if (current.getArea() > largest.getArea()) {
-                largest = current;
-            }
-        }
-        return largest;
-    }
-
-    public Estate findEstateWithMostRooms() {
-        Estate mostRooms = estates.get(0);
-        for (Estate estate : estates) {
-            if (estate.getNumberOfRooms() > mostRooms.getNumberOfRooms()) {
-                mostRooms = estate;
-            }
-        }
-        return mostRooms;
-    }
-
-    public double calculateAveragePrice() {
-        long totalPrice = 0;
-        for (Estate estate : estates) {
-            totalPrice += estate.getPrice();
-        }
-        return (double) totalPrice / estates.size();
-    }
-
-    public void removeEstate(Scanner scanner) {
-        System.out.print("Введіть ID нерухомості для видалення: ");
-        int id = scanner.nextInt();
+    public void removeEstateById(int id) {
         estates.removeIf(estate -> estate.getId() == id);
-        System.out.println("Нерухомість видалено, якщо така існувала.");
     }
 
-    public void changeEstatePrice(Scanner scanner) {
-        System.out.print("Введіть ID нерухомості для зміни ціни: ");
-        int id = scanner.nextInt();
+    public void changeEstatePriceById(int id, long newPrice) {
         for (Estate estate : estates) {
             if (estate.getId() == id) {
-                System.out.print("Введіть нову ціну: ");
-                long newPrice = scanner.nextLong();
-                while (newPrice <= 0) {
-                    System.out.println("Ціна повинна бути більше 0.");
-                    System.out.print("Введіть нову ціну: ");
-                    newPrice = scanner.nextLong();
-                }
                 estate.setPrice(newPrice);
                 System.out.println("Ціну оновлено.");
                 return;
             }
         }
-        System.out.println("Нерухомість з таким ID не знайдено.");
+    }
+
+    public Estate getLargestAreaEstate() {
+        Estate largestAreaEstate = null;
+        int largestArea = 0;
+        for (Estate estate : estates) {
+            if (estate.getArea() > largestArea) {
+                largestArea = estate.getArea();
+                largestAreaEstate = estate;
+            }
+        }
+        return largestAreaEstate;
+    }
+
+    public Estate getMostRoomsEstate() {
+        Estate mostRoomsEstate = null;
+        int mostRooms = 0;
+        for (Estate estate : estates) {
+            if (estate.getNumberOfRooms() > mostRooms) {
+                mostRooms = estate.getNumberOfRooms();
+                mostRoomsEstate = estate;
+            }
+        }
+        return mostRoomsEstate;
+    }
+
+    public long getAveragePrice() {
+        if (estates.isEmpty()) {
+            return 0;
+        }
+        long sum = 0;
+        for (Estate estate : estates) {
+            sum += estate.getPrice();
+        }
+        return sum / estates.size();
     }
 }

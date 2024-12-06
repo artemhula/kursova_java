@@ -1,3 +1,4 @@
+// collections/ClientCollection.java
 package collections;
 
 import models.*;
@@ -12,7 +13,6 @@ public class ClientCollection {
     }
 
 
-
     public ArrayList<Client> readFromFile() {
         ArrayList<Client> clients = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("clients.txt"))) {
@@ -20,7 +20,7 @@ public class ClientCollection {
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 5) {
-                    clients.add(new Client(data[1], Long.parseLong(data[2]), data[3], Service.valueOf(data[4])));
+                    clients.add(new Client(data[1], Long.parseLong(data[2]), data[3], Integer.parseInt(data[4]) == 1 ? Service.BUY : Service.SELL));
                 } else {
                     System.out.println("Невірний формат запису в файлі: " + line);
                 }
@@ -34,7 +34,7 @@ public class ClientCollection {
     public void writeToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("clients.txt"))) {
             for (Client client : clients) {
-                writer.write(client.getId() + "," + client.getName() + "," + client.getPhone() + "," + client.getCompanyName() + "," + client.getService());
+                writer.write(client.getId() + "," + client.getName() + "," + client.getPhone() + "," + client.getCompanyName() + "," + (client.getService() == Service.BUY ? 1 : 2));
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -50,19 +50,7 @@ public class ClientCollection {
         return clients;
     }
 
-    public void showClients() {
-        if (clients.isEmpty()) {
-            System.out.println("Немає клієнтів.");
-            return;
-        }
-        for (Client client : clients) {
-            System.out.println("---------");
-            System.out.println("ID: " + client.getId());
-            System.out.println("ПІБ: " + client.getName());
-            System.out.println("Телефон: " + client.getPhone());
-            System.out.println("Назва компанії: " + client.getCompanyName());
-            System.out.println("Тип послуги: " + (client.getService() == Service.BUY ? "BUY" : "SELL"));
-            System.out.println();
-        }
+    public void removeClientById(long l) {
+        clients.removeIf(client -> client.getId() == l);
     }
 }

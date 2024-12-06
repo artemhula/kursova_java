@@ -1,9 +1,10 @@
+// collections/RealtorCollection.java
+
 package collections;
 
 import models.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RealtorCollection {
     private ArrayList<Realtor> realtors;
@@ -49,25 +50,9 @@ public class RealtorCollection {
         }
     }
 
-    public void showRealtors() {
-        if (realtors.isEmpty()) {
-            System.out.println("Немає ріелторів.");
-        }
-        for (Realtor realtor : realtors) {
-            System.out.println("---------");
-            System.out.println("ПІБ: " + realtor.getName());
-            System.out.println("Телефон: " + realtor.getPhone());
-            System.out.println("Назва компанії: " + realtor.getCompanyName());
-            Address companyAdress = realtor.getCompanyAddress();
-            System.out.println("Адреса компанії: " + companyAdress.getCountry() + ", " + companyAdress.getCity() + ", " + companyAdress.getStreet() + ", " + companyAdress.getHouseNumber() + ", " + companyAdress.getApartmentNumber());
-            System.out.println();
-        }
-    }
+    public ArrayList<Realtor> getRealtors() {return realtors;}
 
-    public void removeRealtor(Scanner scanner) {
-        System.out.print("Введіть ПІБ ріелтора для видалення: ");
-        String name = scanner.next();
-        realtors.removeIf(realtor -> realtor.getName().equals(name));
-        System.out.println("Ріелтора видалено, якщо такий існував.");
+    public void removeRealtorById(long id) {
+        realtors.removeIf(realtor -> realtor.getId() == id);
     }
 }
