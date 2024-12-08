@@ -25,7 +25,7 @@ public class GUI {
     private void createAndShowGUI() {
         JFrame frame = new JFrame("Ріелторська компанія");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1200, 600);
 
         JTabbedPane tabbedPane = new JTabbedPane();
 
@@ -128,21 +128,39 @@ public class GUI {
         displayClients();
     }
 
-    public void showLargestAreaEstate() {
-        Estate estate = estateCollection.getLargestAreaEstate();
-        if (estate != null) {
-            JOptionPane.showMessageDialog(null, "Найбільша площа: " + estate.getArea() + " кв. м", "Найбільша площа", JOptionPane.INFORMATION_MESSAGE);
+    private void showLargestAreaEstate() {
+        Estate largestAreaEstate = estateCollection.getLargestAreaEstate();
+        if (largestAreaEstate != null) {
+            JOptionPane.showMessageDialog(null,
+                    "ID: " + largestAreaEstate.getId() + "\n" +
+                            "Адреса: " + largestAreaEstate.getAddress().getCountry() + ", " + largestAreaEstate.getAddress().getCity() + ", " + largestAreaEstate.getAddress().getStreet() + ", " + largestAreaEstate.getAddress().getHouseNumber() + ", " + largestAreaEstate.getAddress().getApartmentNumber() + "\n" +
+                            "Площа: " + largestAreaEstate.getArea() + "\n" +
+                            "Поверх: " + largestAreaEstate.getLevel() + "\n" +
+                            "Рік побудови: " + largestAreaEstate.getYear() + "\n" +
+                            "Кількість кімнат: " + largestAreaEstate.getNumberOfRooms() + "\n" +
+                            "Вартість: " + largestAreaEstate.getPrice() + "\n" +
+                            "ID клієнта: " + largestAreaEstate.getClientId(),
+                    "Нерухомість з найбільшою площею", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Нерухомості відсутні", "Помилка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Немає даних про нерухомість.", "Інформація", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    public void showMostRoomsEstate() {
-        Estate estate = estateCollection.getMostRoomsEstate();
-        if (estate != null) {
-            JOptionPane.showMessageDialog(null, "Найбільша кількість кімнат: " + estate.getNumberOfRooms(), "Найбільша кількість кімнат", JOptionPane.INFORMATION_MESSAGE);
+    private void showMostRoomsEstate() {
+        Estate mostRoomsEstate = estateCollection.getMostRoomsEstate();
+        if (mostRoomsEstate != null) {
+            JOptionPane.showMessageDialog(null,
+                    "ID: " + mostRoomsEstate.getId() + "\n" +
+                            "Адреса: " + mostRoomsEstate.getAddress().getCountry() + ", " + mostRoomsEstate.getAddress().getCity() + ", " + mostRoomsEstate.getAddress().getStreet() + ", " + mostRoomsEstate.getAddress().getHouseNumber() + ", " + mostRoomsEstate.getAddress().getApartmentNumber() + "\n" +
+                            "Площа: " + mostRoomsEstate.getArea() + "\n" +
+                            "Поверх: " + mostRoomsEstate.getLevel() + "\n" +
+                            "Рік побудови: " + mostRoomsEstate.getYear() + "\n" +
+                            "Кількість кімнат: " + mostRoomsEstate.getNumberOfRooms() + "\n" +
+                            "Вартість: " + mostRoomsEstate.getPrice() + "\n" +
+                            "ID клієнта: " + mostRoomsEstate.getClientId(),
+                    "Нерухомість з найбільшою кількістю кімнат", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Нерухомості відсутні", "Помилка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Немає даних про нерухомість.", "Інформація", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
